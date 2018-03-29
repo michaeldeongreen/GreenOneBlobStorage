@@ -31,7 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.gbScreen = new System.Windows.Forms.GroupBox();
             this.gbButtons = new System.Windows.Forms.GroupBox();
-            this.btnUpload = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnUploadAll = new System.Windows.Forms.Button();
             this.dgvDocuments = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,6 +40,7 @@
             this.extensionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bytesDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.bsDocuments = new System.Windows.Forms.BindingSource(this.components);
+            this.lblTimer = new System.Windows.Forms.Label();
             this.gbScreen.SuspendLayout();
             this.gbButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocuments)).BeginInit();
@@ -59,7 +61,9 @@
             // gbButtons
             // 
             this.gbButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbButtons.Controls.Add(this.btnUpload);
+            this.gbButtons.Controls.Add(this.lblTimer);
+            this.gbButtons.Controls.Add(this.btnDelete);
+            this.gbButtons.Controls.Add(this.btnUploadAll);
             this.gbButtons.Location = new System.Drawing.Point(6, 419);
             this.gbButtons.Name = "gbButtons";
             this.gbButtons.Size = new System.Drawing.Size(820, 48);
@@ -67,15 +71,24 @@
             this.gbButtons.TabStop = false;
             this.gbButtons.Text = "groupBox1";
             // 
-            // btnUpload
+            // btnDelete
             // 
-            this.btnUpload.Location = new System.Drawing.Point(686, 10);
-            this.btnUpload.Name = "btnUpload";
-            this.btnUpload.Size = new System.Drawing.Size(102, 32);
-            this.btnUpload.TabIndex = 0;
-            this.btnUpload.Text = "Upload";
-            this.btnUpload.UseVisualStyleBackColor = true;
-            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
+            this.btnDelete.Location = new System.Drawing.Point(718, 10);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(102, 32);
+            this.btnDelete.TabIndex = 1;
+            this.btnDelete.Text = "Delete All";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            // 
+            // btnUploadAll
+            // 
+            this.btnUploadAll.Location = new System.Drawing.Point(610, 10);
+            this.btnUploadAll.Name = "btnUploadAll";
+            this.btnUploadAll.Size = new System.Drawing.Size(102, 32);
+            this.btnUploadAll.TabIndex = 0;
+            this.btnUploadAll.Text = "Upload All";
+            this.btnUploadAll.UseVisualStyleBackColor = true;
+            this.btnUploadAll.Click += new System.EventHandler(this.btnUploadAll_Click);
             // 
             // dgvDocuments
             // 
@@ -140,6 +153,15 @@
             // 
             this.bsDocuments.DataSource = typeof(GreenOneBlobStorage.Common.Document);
             // 
+            // lblTimer
+            // 
+            this.lblTimer.AutoSize = true;
+            this.lblTimer.Location = new System.Drawing.Point(6, 20);
+            this.lblTimer.Name = "lblTimer";
+            this.lblTimer.Size = new System.Drawing.Size(43, 13);
+            this.lblTimer.TabIndex = 2;
+            this.lblTimer.Text = "lblTimer";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -149,9 +171,9 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.gbScreen.ResumeLayout(false);
             this.gbButtons.ResumeLayout(false);
+            this.gbButtons.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocuments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDocuments)).EndInit();
             this.ResumeLayout(false);
@@ -169,7 +191,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn extensionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewImageColumn bytesDataGridViewImageColumn;
         private System.Windows.Forms.GroupBox gbButtons;
-        private System.Windows.Forms.Button btnUpload;
+        private System.Windows.Forms.Button btnUploadAll;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Label lblTimer;
     }
 }
 

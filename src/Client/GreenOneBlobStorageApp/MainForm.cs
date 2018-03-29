@@ -4,11 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace GreenOneBlobStorageApp
 {
@@ -21,11 +19,6 @@ namespace GreenOneBlobStorageApp
         public MainForm()
         {
             InitializeComponent();
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void dgvDocuments_DragEnter(object sender, DragEventArgs e)
@@ -56,20 +49,54 @@ namespace GreenOneBlobStorageApp
             _bindingListDocuments.AllowEdit = true;
         }
 
-        private async void btnUpload_Click(object sender, EventArgs e)
+        private async void btnUploadAll_Click(object sender, EventArgs e)
         {
-            if (_bindingListDocuments.Count() == 0 && _bindingListDocuments.Where(d => d.IsUploaded == false).Count() > 0) return;
+            if (_bindingListDocuments.Count() == 0 || _bindingListDocuments.Where(d => d.IsUploaded == false).Count() == 0) return;
 
             this.ScreenEnabled(false);
+            this.ClearLblTimer();
+
             var documents = new List<Document>();
             documents.AddRange(_bindingListDocuments.Where(d => d.IsUploaded == false));
+
+            var stopwatch = this.GetAndStartStopwatch();
             var response = await _proxy.PostAsync(documents);
-            this.ScreenEnabled(false);
+            stopwatch.Stop();
+            this.SetLblTimer(stopwatch);
+
+            documents.ForEach(d => d.IsUploaded = true);
+            this.ScreenEnabled(true);
         }
 
         private void ScreenEnabled(bool enabled)
         {
+            if (enabled)
+                this.Cursor = Cursors.Default;
+            else
+                this.Cursor = Cursors.WaitCursor;
+
             gbScreen.Enabled = enabled;
+        }
+
+        private Stopwatch GetAndStartStopwatch()
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            return stopwatch;
+        }
+
+        private void ClearLblTimer()
+        {
+            lblTimer.Text = string.Empty;
+        }
+
+        private void SetLblTimer(Stopwatch stopwatch)
+        {
+            TimeSpan timeSpan = stopwatch.Elapsed;
+            string elapsedTime = String.Format("Elasped Time (HH:MM:SS:MS): {0:00}:{1:00}:{2:00}.{3:00}",
+            timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds,
+            timeSpan.Milliseconds / 10);
+            lblTimer.Text = elapsedTime;
         }
     }
 }
