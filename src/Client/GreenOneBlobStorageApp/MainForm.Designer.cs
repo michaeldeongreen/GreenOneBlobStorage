@@ -31,12 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.gbScreen = new System.Windows.Forms.GroupBox();
             this.dgvDocuments = new System.Windows.Forms.DataGridView();
-            this.bsDocuments = new System.Windows.Forms.BindingSource(this.components);
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.extensionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bytesDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.bsDocuments = new System.Windows.Forms.BindingSource(this.components);
             this.gbScreen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocuments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDocuments)).BeginInit();
@@ -54,6 +54,9 @@
             // 
             // dgvDocuments
             // 
+            this.dgvDocuments.AllowDrop = true;
+            this.dgvDocuments.AllowUserToAddRows = false;
+            this.dgvDocuments.AllowUserToDeleteRows = false;
             this.dgvDocuments.AutoGenerateColumns = false;
             this.dgvDocuments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDocuments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -68,10 +71,8 @@
             this.dgvDocuments.Name = "dgvDocuments";
             this.dgvDocuments.Size = new System.Drawing.Size(800, 457);
             this.dgvDocuments.TabIndex = 0;
-            // 
-            // bsDocuments
-            // 
-            this.bsDocuments.DataSource = typeof(GreenOneBlobStorage.Common.Document);
+            this.dgvDocuments.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvDocuments_DragDrop);
+            this.dgvDocuments.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvDocuments_DragEnter);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -111,6 +112,10 @@
             this.bytesDataGridViewImageColumn.Name = "bytesDataGridViewImageColumn";
             this.bytesDataGridViewImageColumn.Visible = false;
             // 
+            // bsDocuments
+            // 
+            this.bsDocuments.DataSource = typeof(GreenOneBlobStorage.Common.Document);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -120,6 +125,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.gbScreen.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocuments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDocuments)).EndInit();
