@@ -16,6 +16,8 @@ namespace GreenOneBlobStorageApp
     {
         private BindingList<Document> _bindingListDocuments = new BindingList<Document>();
         private readonly FileService _fileService = new FileService();
+        private readonly Proxy _proxy = new Proxy();
+
         public MainForm()
         {
             InitializeComponent();
@@ -52,6 +54,22 @@ namespace GreenOneBlobStorageApp
             bsDocuments.DataSource = _bindingListDocuments;
             bsDocuments.ResetBindings(false);
             _bindingListDocuments.AllowEdit = true;
+        }
+
+        private async void btnUpload_Click(object sender, EventArgs e)
+        {
+            if (_bindingListDocuments.Count() == 0 && _bindingListDocuments.Where(d => d.IsUploaded == false).Count() > 0) return;
+
+            this.ScreenEnabled(false);
+            var documents = new List<Document>();
+            documents.AddRange(_bindingListDocuments.Where(d => d.IsUploaded == false));
+            var response = await _proxy.PostAsync(documents);
+            this.ScreenEnabled(false);
+        }
+
+        private void ScreenEnabled(bool enabled)
+        {
+            gbScreen.Enabled = enabled;
         }
     }
 }

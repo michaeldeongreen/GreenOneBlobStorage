@@ -34,6 +34,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\DocumentServiceClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,6 +60,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxy.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -65,6 +73,28 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Connected Services\DocumentServiceClient\DocumentService.wsdl" />
+    <None Include="Connected Services\DocumentServiceClient\DocumentService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DocumentServiceClient\DocumentService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DocumentServiceClient\DocumentService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DocumentServiceClient\DocumentService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DocumentServiceClient\DocumentService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DocumentServiceClient\GreenOneBlobStorageApp.DocumentServiceClient.DocumentServiceDeleteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DocumentServiceClient\GreenOneBlobStorageApp.DocumentServiceClient.DocumentServicePostResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Properties\DataSources\GreenOneBlobStorage.Common.Document.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -88,6 +118,27 @@
       <Project>{43c5b346-7626-4a26-bc58-aad63ce3e303}</Project>
       <Name>GreenOneBlobStorage.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\DocumentServiceClient\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DocumentServiceClient\DocumentService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DocumentServiceClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DocumentServiceClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DocumentServiceClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

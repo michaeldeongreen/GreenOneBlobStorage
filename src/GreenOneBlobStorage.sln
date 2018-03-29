@@ -6,12 +6,21 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{C8C1F9F0-4DBD-48DF-9BFA-B7C50E4DE2F2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenOneBlobStorageApp", "Client\GreenOneBlobStorageApp\GreenOneBlobStorageApp.csproj", "{223CEE60-09D9-49E2-912B-772489C20F4F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D59E8CD9-C393-4124-8305-A33A90DFAC1E} = {D59E8CD9-C393-4124-8305-A33A90DFAC1E}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{7D15FF67-0128-48DA-A79B-61FD3080923B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenOneBlobStorage.Common", "Common\GreenOneBlobStorage.Common\GreenOneBlobStorage.Common.csproj", "{D4E6C9F1-5695-43DD-8317-1CFF6985EFCA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenOneBlobStorage.Services", "Common\GreenOneBlobStorage.Services\GreenOneBlobStorage.Services.csproj", "{43C5B346-7626-4A26-BC58-AAD63CE3E303}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{BA80AF52-BA01-47E3-BADC-BDC253869F15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenOneBlobStorageService", "Service\GreenOneBlobStorageService\GreenOneBlobStorageService.csproj", "{D59E8CD9-C393-4124-8305-A33A90DFAC1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenOneBlobStorageService.Domain", "Service\GreenOneBlobStorageService.Domain\GreenOneBlobStorageService.Domain.csproj", "{64540990-B4C8-456C-A6F8-5147EDC08829}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +40,14 @@ Global
 		{43C5B346-7626-4A26-BC58-AAD63CE3E303}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43C5B346-7626-4A26-BC58-AAD63CE3E303}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43C5B346-7626-4A26-BC58-AAD63CE3E303}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D59E8CD9-C393-4124-8305-A33A90DFAC1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D59E8CD9-C393-4124-8305-A33A90DFAC1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D59E8CD9-C393-4124-8305-A33A90DFAC1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D59E8CD9-C393-4124-8305-A33A90DFAC1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64540990-B4C8-456C-A6F8-5147EDC08829}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64540990-B4C8-456C-A6F8-5147EDC08829}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64540990-B4C8-456C-A6F8-5147EDC08829}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64540990-B4C8-456C-A6F8-5147EDC08829}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +56,8 @@ Global
 		{223CEE60-09D9-49E2-912B-772489C20F4F} = {C8C1F9F0-4DBD-48DF-9BFA-B7C50E4DE2F2}
 		{D4E6C9F1-5695-43DD-8317-1CFF6985EFCA} = {7D15FF67-0128-48DA-A79B-61FD3080923B}
 		{43C5B346-7626-4A26-BC58-AAD63CE3E303} = {7D15FF67-0128-48DA-A79B-61FD3080923B}
+		{D59E8CD9-C393-4124-8305-A33A90DFAC1E} = {BA80AF52-BA01-47E3-BADC-BDC253869F15}
+		{64540990-B4C8-456C-A6F8-5147EDC08829} = {BA80AF52-BA01-47E3-BADC-BDC253869F15}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F5B405D5-9BDE-404E-A6DC-F75DCD45459F}

@@ -3,3 +3,4 @@ debug
 obj
 packages
 .vs
+*.user

@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.gbScreen = new System.Windows.Forms.GroupBox();
+            this.gbButtons = new System.Windows.Forms.GroupBox();
+            this.btnUpload = new System.Windows.Forms.Button();
             this.dgvDocuments = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,19 +40,42 @@
             this.bytesDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.bsDocuments = new System.Windows.Forms.BindingSource(this.components);
             this.gbScreen.SuspendLayout();
+            this.gbButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocuments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDocuments)).BeginInit();
             this.SuspendLayout();
             // 
             // gbScreen
             // 
+            this.gbScreen.Controls.Add(this.gbButtons);
             this.gbScreen.Controls.Add(this.dgvDocuments);
-            this.gbScreen.Location = new System.Drawing.Point(23, 12);
+            this.gbScreen.Location = new System.Drawing.Point(12, 12);
             this.gbScreen.Name = "gbScreen";
-            this.gbScreen.Size = new System.Drawing.Size(806, 476);
+            this.gbScreen.Size = new System.Drawing.Size(832, 485);
             this.gbScreen.TabIndex = 0;
             this.gbScreen.TabStop = false;
             this.gbScreen.Text = "Drag N Drop Documents";
+            // 
+            // gbButtons
+            // 
+            this.gbButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbButtons.Controls.Add(this.btnUpload);
+            this.gbButtons.Location = new System.Drawing.Point(6, 419);
+            this.gbButtons.Name = "gbButtons";
+            this.gbButtons.Size = new System.Drawing.Size(820, 48);
+            this.gbButtons.TabIndex = 1;
+            this.gbButtons.TabStop = false;
+            this.gbButtons.Text = "groupBox1";
+            // 
+            // btnUpload
+            // 
+            this.btnUpload.Location = new System.Drawing.Point(686, 10);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(102, 32);
+            this.btnUpload.TabIndex = 0;
+            this.btnUpload.Text = "Upload";
+            this.btnUpload.UseVisualStyleBackColor = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
             // dgvDocuments
             // 
@@ -66,10 +91,9 @@
             this.extensionDataGridViewTextBoxColumn,
             this.bytesDataGridViewImageColumn});
             this.dgvDocuments.DataSource = this.bsDocuments;
-            this.dgvDocuments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDocuments.Location = new System.Drawing.Point(3, 16);
             this.dgvDocuments.Name = "dgvDocuments";
-            this.dgvDocuments.Size = new System.Drawing.Size(800, 457);
+            this.dgvDocuments.Size = new System.Drawing.Size(823, 397);
             this.dgvDocuments.TabIndex = 0;
             this.dgvDocuments.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvDocuments_DragDrop);
             this.dgvDocuments.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvDocuments_DragEnter);
@@ -127,6 +151,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.gbScreen.ResumeLayout(false);
+            this.gbButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocuments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDocuments)).EndInit();
             this.ResumeLayout(false);
@@ -143,6 +168,8 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn typeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn extensionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewImageColumn bytesDataGridViewImageColumn;
+        private System.Windows.Forms.GroupBox gbButtons;
+        private System.Windows.Forms.Button btnUpload;
     }
 }
 

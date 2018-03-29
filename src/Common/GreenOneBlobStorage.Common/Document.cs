@@ -20,5 +20,7 @@ namespace GreenOneBlobStorage.Common
         public string  Extension { get; set; }
         [DataMember]
         public byte[] Bytes { get; set; }
+        [DataMember]
+        public bool IsUploaded { get; set; }
     }
 }
