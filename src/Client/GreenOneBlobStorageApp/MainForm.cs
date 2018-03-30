@@ -136,7 +136,7 @@ namespace GreenOneBlobStorageApp
 
             if (e.ColumnIndex == _removeColumn)
             {
-                bool task = await DeleteDocumentAsync(selectedDocument);
+                bool task = await DeleteDocumentAsync(new List<Document>() { selectedDocument });
             }
             else if (e.ColumnIndex == _downloadColumn)
             {
@@ -144,16 +144,20 @@ namespace GreenOneBlobStorageApp
             }
         }
 
-        private async Task<bool> DeleteDocumentAsync(Document document)
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (_bindingListDocuments.Count() == 0 || _bindingListDocuments.Where(d => d.IsUploaded == true).Count() == 0) return;
+
+            bool task = await DeleteDocumentAsync(_bindingListDocuments.Where(d => d.IsUploaded == true).ToList());
+        }
+
+        private async Task<bool> DeleteDocumentAsync(List<Document> documents)
         {
             bool task = true;
             try
             {
                 ScreenEnabled(false);
                 ClearLblTimer();
-
-                var documents = new List<Document>();
-                documents.Add(document);
 
                 var stopwatch = GetAndStartStopwatch();
                 var response = await _proxy.DeleteAsync(documents);
@@ -163,9 +167,9 @@ namespace GreenOneBlobStorageApp
                 if (!string.IsNullOrEmpty(response.Error))
                     throw new Exception(response.Error);
 
-                _bindingListDocuments.Remove(document);
+                documents.ForEach(d => _bindingListDocuments.Remove(d));
                 ScreenEnabled(true);
-                MessageBox.Show("Document has been removed from Azure", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Document(s) has been removed from Azure", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -181,6 +185,12 @@ namespace GreenOneBlobStorageApp
             bool task = true;
             try
             {
+                if (!document.IsUploaded)
+                {
+                    MessageBox.Show("Document needs to be uploaded to Azure before it can be downloaded", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
                 ScreenEnabled(false);
                 ClearLblTimer();
 

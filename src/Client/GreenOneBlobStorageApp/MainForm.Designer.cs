@@ -36,7 +36,6 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUploadAll = new System.Windows.Forms.Button();
             this.dgvDocuments = new System.Windows.Forms.DataGridView();
-            this.bsDocuments = new System.Windows.Forms.BindingSource(this.components);
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -44,6 +43,7 @@
             this.bytesDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.Download = new System.Windows.Forms.DataGridViewImageColumn();
             this.Remove = new System.Windows.Forms.DataGridViewImageColumn();
+            this.bsDocuments = new System.Windows.Forms.BindingSource(this.components);
             this.gbScreen.SuspendLayout();
             this.gbButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocuments)).BeginInit();
@@ -90,6 +90,7 @@
             this.btnDelete.TabIndex = 1;
             this.btnDelete.Text = "Delete All";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUploadAll
             // 
@@ -124,10 +125,6 @@
             this.dgvDocuments.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDocuments_CellDoubleClick);
             this.dgvDocuments.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvDocuments_DragDrop);
             this.dgvDocuments.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvDocuments_DragEnter);
-            // 
-            // bsDocuments
-            // 
-            this.bsDocuments.DataSource = typeof(GreenOneBlobStorage.Common.Document);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -183,6 +180,10 @@
             this.Remove.HeaderText = "Remove";
             this.Remove.Image = ((System.Drawing.Image)(resources.GetObject("Remove.Image")));
             this.Remove.Name = "Remove";
+            // 
+            // bsDocuments
+            // 
+            this.bsDocuments.DataSource = typeof(GreenOneBlobStorage.Common.Document);
             // 
             // MainForm
             // 
