@@ -31,16 +31,18 @@
             this.components = new System.ComponentModel.Container();
             this.gbScreen = new System.Windows.Forms.GroupBox();
             this.gbButtons = new System.Windows.Forms.GroupBox();
+            this.lblTimer = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUploadAll = new System.Windows.Forms.Button();
             this.dgvDocuments = new System.Windows.Forms.DataGridView();
+            this.bsDocuments = new System.Windows.Forms.BindingSource(this.components);
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.extensionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bytesDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.bsDocuments = new System.Windows.Forms.BindingSource(this.components);
-            this.lblTimer = new System.Windows.Forms.Label();
+            this.Download = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Remove = new System.Windows.Forms.DataGridViewImageColumn();
             this.gbScreen.SuspendLayout();
             this.gbButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocuments)).BeginInit();
@@ -70,6 +72,15 @@
             this.gbButtons.TabIndex = 1;
             this.gbButtons.TabStop = false;
             this.gbButtons.Text = "groupBox1";
+            // 
+            // lblTimer
+            // 
+            this.lblTimer.AutoSize = true;
+            this.lblTimer.Location = new System.Drawing.Point(6, 20);
+            this.lblTimer.Name = "lblTimer";
+            this.lblTimer.Size = new System.Drawing.Size(43, 13);
+            this.lblTimer.TabIndex = 2;
+            this.lblTimer.Text = "lblTimer";
             // 
             // btnDelete
             // 
@@ -102,7 +113,9 @@
             this.nameDataGridViewTextBoxColumn,
             this.typeDataGridViewTextBoxColumn,
             this.extensionDataGridViewTextBoxColumn,
-            this.bytesDataGridViewImageColumn});
+            this.bytesDataGridViewImageColumn,
+            this.Download,
+            this.Remove});
             this.dgvDocuments.DataSource = this.bsDocuments;
             this.dgvDocuments.Location = new System.Drawing.Point(3, 16);
             this.dgvDocuments.Name = "dgvDocuments";
@@ -110,6 +123,10 @@
             this.dgvDocuments.TabIndex = 0;
             this.dgvDocuments.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvDocuments_DragDrop);
             this.dgvDocuments.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvDocuments_DragEnter);
+            // 
+            // bsDocuments
+            // 
+            this.bsDocuments.DataSource = typeof(GreenOneBlobStorage.Common.Document);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -149,18 +166,18 @@
             this.bytesDataGridViewImageColumn.Name = "bytesDataGridViewImageColumn";
             this.bytesDataGridViewImageColumn.Visible = false;
             // 
-            // bsDocuments
+            // Download
             // 
-            this.bsDocuments.DataSource = typeof(GreenOneBlobStorage.Common.Document);
+            this.Download.HeaderText = "Download";
+            this.Download.Image = global::GreenOneBlobStorageApp.Properties.Resources.download;
+            this.Download.Name = "Download";
+            this.Download.ReadOnly = true;
             // 
-            // lblTimer
+            // Remove
             // 
-            this.lblTimer.AutoSize = true;
-            this.lblTimer.Location = new System.Drawing.Point(6, 20);
-            this.lblTimer.Name = "lblTimer";
-            this.lblTimer.Size = new System.Drawing.Size(43, 13);
-            this.lblTimer.TabIndex = 2;
-            this.lblTimer.Text = "lblTimer";
+            this.Remove.HeaderText = "Remove";
+            this.Remove.Image = global::GreenOneBlobStorageApp.Properties.Resources.delete;
+            this.Remove.Name = "Remove";
             // 
             // MainForm
             // 
@@ -185,15 +202,17 @@
         private System.Windows.Forms.GroupBox gbScreen;
         private System.Windows.Forms.DataGridView dgvDocuments;
         private System.Windows.Forms.BindingSource bsDocuments;
+        private System.Windows.Forms.GroupBox gbButtons;
+        private System.Windows.Forms.Button btnUploadAll;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Label lblTimer;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn typeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn extensionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewImageColumn bytesDataGridViewImageColumn;
-        private System.Windows.Forms.GroupBox gbButtons;
-        private System.Windows.Forms.Button btnUploadAll;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Label lblTimer;
+        private System.Windows.Forms.DataGridViewImageColumn Download;
+        private System.Windows.Forms.DataGridViewImageColumn Remove;
     }
 }
 
