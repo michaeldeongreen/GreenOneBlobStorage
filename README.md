@@ -1,6 +1,5 @@
 <p>This repository was created for a Proof of Concept to prove out uploading files to Azure Blob Storage</p>
-
-<br /><br />
+<br />
 
 <b>To run this application, please do the following:</b>
 <br />
