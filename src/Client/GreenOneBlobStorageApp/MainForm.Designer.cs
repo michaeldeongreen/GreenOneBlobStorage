@@ -147,7 +147,7 @@
             // typeDataGridViewTextBoxColumn
             // 
             this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-            this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.typeDataGridViewTextBoxColumn.HeaderText = "Application";
             this.typeDataGridViewTextBoxColumn.Items.AddRange(new object[] {
             "CEM",
             "CUDL3",
