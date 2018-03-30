@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GreenOneBlobStorage.Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,13 @@ namespace GreenOneBlobStorage.Services
         {
             string extension = Path.GetExtension(file);
             return extension;
+        }
+
+        public string WriteBytesToFile(string path, Document document)
+        {
+            string file = $"{path}\\{document.Name}";
+            File.WriteAllBytes(file, document.Bytes);
+            return file;
         }
     }
 }

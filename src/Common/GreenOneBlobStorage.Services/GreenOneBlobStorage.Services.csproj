@@ -43,5 +43,11 @@
     <Compile Include="FileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GreenOneBlobStorage.Common\GreenOneBlobStorage.Common.csproj">
+      <Project>{d4e6c9f1-5695-43dd-8317-1cff6985efca}</Project>
+      <Name>GreenOneBlobStorage.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

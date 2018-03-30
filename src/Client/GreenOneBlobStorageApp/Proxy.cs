@@ -16,6 +16,13 @@ namespace GreenOneBlobStorageApp
             _client = new DocumentServiceClient.DocumentServiceClient();
         }
 
+        public async Task<DocumentServiceGetResponse> GetAsync(Document document)
+        {
+            var request = new DocumentServiceGetRequest() { Document = document };
+            var response = await _client.GetAsync(request);
+            return response;
+        }
+
         public async Task<DocumentServicePostResponse> PostAsync(List<Document> documents)
         {
             var request = new DocumentServicePostRequest() { Documents = documents };

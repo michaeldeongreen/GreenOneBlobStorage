@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace GreenOneBlobStorageApp
 {
@@ -68,6 +69,15 @@ namespace GreenOneBlobStorageApp
             stopwatch.Stop();
             SetLblTimer(stopwatch);
 
+            /*if (!string.IsNullOrEmpty(response.Error))
+            {
+                MessageBox.Show("Error trying to upload files to Azure", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("Error trying to upload files to Azure", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }*/
+
             documents.ForEach(d => d.IsUploaded = true);
             ScreenEnabled(true);
         }
@@ -114,6 +124,10 @@ namespace GreenOneBlobStorageApp
             {
                 bool task = await DeleteDocumentAsync(selectedDocument);
             }
+            else if (e.ColumnIndex == _downloadColumn)
+            {
+                bool task = await GetDocumentAsync(selectedDocument);
+            }
         }
 
         private async Task<bool> DeleteDocumentAsync(Document document)
@@ -131,6 +145,36 @@ namespace GreenOneBlobStorageApp
 
             _bindingListDocuments.Remove(document);
             ScreenEnabled(true);
+
+            return true;
+        }
+
+        private async Task<bool> GetDocumentAsync(Document document)
+        {
+            ScreenEnabled(false);
+            ClearLblTimer();
+
+            document.Bytes = null;
+
+            var stopwatch = GetAndStartStopwatch();
+            var response = await _proxy.GetAsync(document);
+            stopwatch.Stop();
+            SetLblTimer(stopwatch);
+
+            ScreenEnabled(true);
+
+            if (!string.IsNullOrEmpty(response.Error))
+            {
+                MessageBox.Show("Error trying to download file from Azure", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            string path = ConfigurationManager.AppSettings["DownloadPath"].ToString();
+            document.Bytes = response.Document.Bytes;
+            string file = _fileService.WriteBytesToFile(path, document);
+            document.Bytes = null;
+
+            System.Diagnostics.Process.Start(file);
 
             return true;
         }

@@ -35,7 +35,7 @@ namespace GreenOneBlobStorageService
             DocumentServiceGetResponse response = new DocumentServiceGetResponse();
             try
             {
-                request.Document = await _blogStorageService.GetDocumentAsync(request.Document);
+                response.Document = await _blogStorageService.GetDocumentAsync(request.Document);
             }
             catch (System.Exception ex)
             {
