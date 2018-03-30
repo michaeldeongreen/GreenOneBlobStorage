@@ -56,30 +56,44 @@ namespace GreenOneBlobStorageApp
 
         private async void btnUploadAll_Click(object sender, EventArgs e)
         {
-            if (_bindingListDocuments.Count() == 0 || _bindingListDocuments.Where(d => d.IsUploaded == false).Count() == 0) return;
+            try
+            {
+                if (_bindingListDocuments.Count() == 0 || _bindingListDocuments.Where(d => d.IsUploaded == false).Count() == 0) return;
 
-            ScreenEnabled(false);
-            ClearLblTimer();
+                if (!IsDocumentsValid(_bindingListDocuments.Where(d => d.IsUploaded == false)))
+                {
+                    MessageBox.Show("Documents found with no Application", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-            var documents = new List<Document>();
-            documents.AddRange(_bindingListDocuments.Where(d => d.IsUploaded == false));
+                ScreenEnabled(false);
+                ClearLblTimer();
 
-            var stopwatch = GetAndStartStopwatch();
-            var response = await _proxy.PostAsync(documents);
-            stopwatch.Stop();
-            SetLblTimer(stopwatch);
+                var documents = new List<Document>();
+                documents.AddRange(_bindingListDocuments.Where(d => d.IsUploaded == false));
 
-            /*if (!string.IsNullOrEmpty(response.Error))
+                var stopwatch = GetAndStartStopwatch();
+                var response = await _proxy.PostAsync(documents);
+                stopwatch.Stop();
+                SetLblTimer(stopwatch);
+
+                if (!string.IsNullOrEmpty(response.Error))
+                    throw new Exception(response.Error);
+
+
+                documents.ForEach(d => d.IsUploaded = true);
+                MessageBox.Show("All documents have been uploaded to Azure", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Error trying to upload files to Azure", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
-            {
-                MessageBox.Show("Error trying to upload files to Azure", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
-
-            documents.ForEach(d => d.IsUploaded = true);
             ScreenEnabled(true);
+        }
+
+        private bool IsDocumentsValid(IEnumerable<Document> documents)
+        {
+            return documents.Where(d => string.IsNullOrEmpty(d.Type)).Count() > 0 ? false : true;
         }
 
         private void ScreenEnabled(bool enabled)
@@ -132,51 +146,71 @@ namespace GreenOneBlobStorageApp
 
         private async Task<bool> DeleteDocumentAsync(Document document)
         {
-            ScreenEnabled(false);
-            ClearLblTimer();
+            bool task = true;
+            try
+            {
+                ScreenEnabled(false);
+                ClearLblTimer();
 
-            var documents = new List<Document>();
-            documents.Add(document);
+                var documents = new List<Document>();
+                documents.Add(document);
 
-            var stopwatch = GetAndStartStopwatch();
-            var response = await _proxy.DeleteAsync(documents);
-            stopwatch.Stop();
-            SetLblTimer(stopwatch);
+                var stopwatch = GetAndStartStopwatch();
+                var response = await _proxy.DeleteAsync(documents);
+                stopwatch.Stop();
+                SetLblTimer(stopwatch);
 
-            _bindingListDocuments.Remove(document);
-            ScreenEnabled(true);
+                if (!string.IsNullOrEmpty(response.Error))
+                    throw new Exception(response.Error);
 
-            return true;
+                _bindingListDocuments.Remove(document);
+                ScreenEnabled(true);
+                MessageBox.Show("Document has been removed from Azure", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error trying to delete file from Azure", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                task = false;
+            }
+
+            return task;
         }
 
         private async Task<bool> GetDocumentAsync(Document document)
         {
-            ScreenEnabled(false);
-            ClearLblTimer();
-
-            document.Bytes = null;
-
-            var stopwatch = GetAndStartStopwatch();
-            var response = await _proxy.GetAsync(document);
-            stopwatch.Stop();
-            SetLblTimer(stopwatch);
-
-            ScreenEnabled(true);
-
-            if (!string.IsNullOrEmpty(response.Error))
+            bool task = true;
+            try
             {
-                MessageBox.Show("Error trying to download file from Azure", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                ScreenEnabled(false);
+                ClearLblTimer();
+
+                document.Bytes = null;
+
+                var stopwatch = GetAndStartStopwatch();
+                var response = await _proxy.GetAsync(document);
+                stopwatch.Stop();
+                SetLblTimer(stopwatch);
+
+                ScreenEnabled(true);
+
+                if (!string.IsNullOrEmpty(response.Error))
+                    throw new Exception(response.Error);
+
+                string path = ConfigurationManager.AppSettings["DownloadPath"].ToString();
+                document.Bytes = response.Document.Bytes;
+                string file = _fileService.WriteBytesToFile(path, document);
+                document.Bytes = null;
+
+                System.Diagnostics.Process.Start(file);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error trying to get file from Azure", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                task = false;
             }
 
-            string path = ConfigurationManager.AppSettings["DownloadPath"].ToString();
-            document.Bytes = response.Document.Bytes;
-            string file = _fileService.WriteBytesToFile(path, document);
-            document.Bytes = null;
 
-            System.Diagnostics.Process.Start(file);
-
-            return true;
+            return task;
         }
     }
 }
