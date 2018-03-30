@@ -20,7 +20,14 @@ namespace GreenOneBlobStorageApp
         {
             var request = new DocumentServicePostRequest() { Documents = documents };
             var response = await _client.PostAsync(request);
+            return response;
+        }
 
+        public async Task<DocumentServiceDeleteResponse> DeleteAsync(List<Document> documents)
+        {
+            documents.ForEach(d => d.Bytes = null);
+            var request = new DocumentServiceDeleteRequest() { Documents = documents };
+            var response = await _client.DeleteAsync(request);
             return response;
         }
     }

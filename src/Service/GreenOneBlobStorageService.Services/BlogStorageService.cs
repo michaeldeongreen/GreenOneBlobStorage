@@ -41,6 +41,25 @@ namespace GreenOneBlobStorageService.Services
             return task;
         }
 
+        public async Task<bool> DeleteDocumentAsync(List<Document> documents)
+        {
+            bool task = false;
+            var tasks = documents.Select(d => DeleteDocumentAsync(d));
+            await Task.WhenAll(tasks);
+            task = true;
+            return task;
+        }
+
+        private async Task<bool> DeleteDocumentAsync(Document document)
+        {
+            bool task = false;
+            CloudBlobContainer container = GetCloudBlobContainer(document.Type.ToLower());
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(document.Id.ToString());
+            await blockBlob.DeleteAsync();
+            task = true;
+            return task;
+        }
+
         private CloudBlobContainer GetCloudBlobContainer(string containerName)
         {
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting(_storageConnectionStringName));

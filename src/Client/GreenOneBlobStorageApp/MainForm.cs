@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace GreenOneBlobStorageApp
 {
@@ -15,10 +16,13 @@ namespace GreenOneBlobStorageApp
         private BindingList<Document> _bindingListDocuments = new BindingList<Document>();
         private readonly FileService _fileService = new FileService();
         private readonly Proxy _proxy = new Proxy();
+        private const int _downloadColumn = 5;
+        private const int _removeColumn = 6;
 
         public MainForm()
         {
             InitializeComponent();
+            ClearLblTimer();
         }
 
         private void dgvDocuments_DragEnter(object sender, DragEventArgs e)
@@ -39,7 +43,7 @@ namespace GreenOneBlobStorageApp
                 Bytes = _fileService.ConvertToBytes(file),
                  Type = string.Empty});
             }
-            this.BindDgvDocumentsGrid();
+            BindDgvDocumentsGrid();
         }
 
         private void BindDgvDocumentsGrid()
@@ -53,27 +57,27 @@ namespace GreenOneBlobStorageApp
         {
             if (_bindingListDocuments.Count() == 0 || _bindingListDocuments.Where(d => d.IsUploaded == false).Count() == 0) return;
 
-            this.ScreenEnabled(false);
-            this.ClearLblTimer();
+            ScreenEnabled(false);
+            ClearLblTimer();
 
             var documents = new List<Document>();
             documents.AddRange(_bindingListDocuments.Where(d => d.IsUploaded == false));
 
-            var stopwatch = this.GetAndStartStopwatch();
+            var stopwatch = GetAndStartStopwatch();
             var response = await _proxy.PostAsync(documents);
             stopwatch.Stop();
-            this.SetLblTimer(stopwatch);
+            SetLblTimer(stopwatch);
 
             documents.ForEach(d => d.IsUploaded = true);
-            this.ScreenEnabled(true);
+            ScreenEnabled(true);
         }
 
         private void ScreenEnabled(bool enabled)
         {
             if (enabled)
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             else
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
             gbScreen.Enabled = enabled;
         }
@@ -97,6 +101,38 @@ namespace GreenOneBlobStorageApp
             timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds,
             timeSpan.Milliseconds / 10);
             lblTimer.Text = elapsedTime;
+        }
+
+        private async void dgvDocuments_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+            var id = dgvDocuments.Rows[e.RowIndex].Cells[0].Value;
+            Document selectedDocument = _bindingListDocuments.SingleOrDefault(d => d.Id.ToString() == id.ToString());
+
+            if (e.ColumnIndex == _removeColumn)
+            {
+                bool task = await DeleteDocumentAsync(selectedDocument);
+            }
+        }
+
+        private async Task<bool> DeleteDocumentAsync(Document document)
+        {
+            ScreenEnabled(false);
+            ClearLblTimer();
+
+            var documents = new List<Document>();
+            documents.Add(document);
+
+            var stopwatch = GetAndStartStopwatch();
+            var response = await _proxy.DeleteAsync(documents);
+            stopwatch.Stop();
+            SetLblTimer(stopwatch);
+
+            _bindingListDocuments.Remove(document);
+            ScreenEnabled(true);
+
+            return true;
         }
     }
 }

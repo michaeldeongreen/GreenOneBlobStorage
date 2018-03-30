@@ -17,7 +17,17 @@ namespace GreenOneBlobStorageService
         }
         public async Task<DocumentServiceDeleteResponse> DeleteAsync(DocumentServiceDeleteRequest request)
         {
-            return await Task.Factory.StartNew(() => new DocumentServiceDeleteResponse());
+            DocumentServiceDeleteResponse response = new DocumentServiceDeleteResponse();
+            try
+            {
+                await _blogStorageService.DeleteDocumentAsync(request.Documents);
+                response.Documents = request.Documents.Select(d => d.Id).ToArray();
+            }
+            catch (System.Exception ex)
+            {
+                response = new DocumentServiceDeleteResponse() { Error = ex.Message };
+            }
+            return response;
         }
 
         public async Task<Document> GetAsync(Document document)

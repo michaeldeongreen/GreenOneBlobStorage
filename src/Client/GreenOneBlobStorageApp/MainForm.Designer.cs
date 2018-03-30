@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.gbScreen = new System.Windows.Forms.GroupBox();
             this.gbButtons = new System.Windows.Forms.GroupBox();
             this.lblTimer = new System.Windows.Forms.Label();
@@ -55,7 +56,7 @@
             this.gbScreen.Controls.Add(this.dgvDocuments);
             this.gbScreen.Location = new System.Drawing.Point(12, 12);
             this.gbScreen.Name = "gbScreen";
-            this.gbScreen.Size = new System.Drawing.Size(832, 485);
+            this.gbScreen.Size = new System.Drawing.Size(733, 485);
             this.gbScreen.TabIndex = 0;
             this.gbScreen.TabStop = false;
             this.gbScreen.Text = "Drag N Drop Documents";
@@ -68,10 +69,9 @@
             this.gbButtons.Controls.Add(this.btnUploadAll);
             this.gbButtons.Location = new System.Drawing.Point(6, 419);
             this.gbButtons.Name = "gbButtons";
-            this.gbButtons.Size = new System.Drawing.Size(820, 48);
+            this.gbButtons.Size = new System.Drawing.Size(712, 48);
             this.gbButtons.TabIndex = 1;
             this.gbButtons.TabStop = false;
-            this.gbButtons.Text = "groupBox1";
             // 
             // lblTimer
             // 
@@ -84,7 +84,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(718, 10);
+            this.btnDelete.Location = new System.Drawing.Point(601, 10);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(102, 32);
             this.btnDelete.TabIndex = 1;
@@ -93,7 +93,7 @@
             // 
             // btnUploadAll
             // 
-            this.btnUploadAll.Location = new System.Drawing.Point(610, 10);
+            this.btnUploadAll.Location = new System.Drawing.Point(493, 10);
             this.btnUploadAll.Name = "btnUploadAll";
             this.btnUploadAll.Size = new System.Drawing.Size(102, 32);
             this.btnUploadAll.TabIndex = 0;
@@ -119,8 +119,9 @@
             this.dgvDocuments.DataSource = this.bsDocuments;
             this.dgvDocuments.Location = new System.Drawing.Point(3, 16);
             this.dgvDocuments.Name = "dgvDocuments";
-            this.dgvDocuments.Size = new System.Drawing.Size(823, 397);
+            this.dgvDocuments.Size = new System.Drawing.Size(715, 397);
             this.dgvDocuments.TabIndex = 0;
+            this.dgvDocuments.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDocuments_CellDoubleClick);
             this.dgvDocuments.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvDocuments_DragDrop);
             this.dgvDocuments.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvDocuments_DragEnter);
             // 
@@ -139,7 +140,9 @@
             // 
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.MinimumWidth = 200;
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.Width = 250;
             // 
             // typeDataGridViewTextBoxColumn
             // 
@@ -149,6 +152,7 @@
             "CEM",
             "CUDL3",
             "CUDL4"});
+            this.typeDataGridViewTextBoxColumn.MinimumWidth = 50;
             this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
             this.typeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.typeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -175,19 +179,21 @@
             // 
             // Remove
             // 
+            this.Remove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Remove.HeaderText = "Remove";
-            this.Remove.Image = global::GreenOneBlobStorageApp.Properties.Resources.delete;
+            this.Remove.Image = ((System.Drawing.Image)(resources.GetObject("Remove.Image")));
             this.Remove.Name = "Remove";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(856, 509);
+            this.ClientSize = new System.Drawing.Size(753, 509);
             this.Controls.Add(this.gbScreen);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "DocRep Azure - Proof of Concept";
             this.gbScreen.ResumeLayout(false);
             this.gbButtons.ResumeLayout(false);
             this.gbButtons.PerformLayout();
