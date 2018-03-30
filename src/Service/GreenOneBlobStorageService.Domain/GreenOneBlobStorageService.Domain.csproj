@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="DocumentServiceDeleteRequest.cs" />
     <Compile Include="DocumentServiceDeleteResponse.cs" />
+    <Compile Include="DocumentServiceGetRequest.cs" />
+    <Compile Include="DocumentServiceGetResponse.cs" />
     <Compile Include="DocumentServicePostRequest.cs" />
     <Compile Include="DocumentServicePostResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

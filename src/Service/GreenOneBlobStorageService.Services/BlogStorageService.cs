@@ -60,6 +60,20 @@ namespace GreenOneBlobStorageService.Services
             return task;
         }
 
+        public async Task<Document> GetDocumentAsync(Document document)
+        {
+            CloudBlobContainer container = GetCloudBlobContainer(document.Type.ToLower());
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(document.Id.ToString());
+            if (blockBlob != null)
+            {
+                blockBlob.FetchAttributes();
+                long fileByteLength = blockBlob.Properties.Length;
+                document.Bytes = new byte[fileByteLength];
+                await blockBlob.DownloadToByteArrayAsync(document.Bytes, 0);
+            }
+            return document;
+        }
+
         private CloudBlobContainer GetCloudBlobContainer(string containerName)
         {
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting(_storageConnectionStringName));

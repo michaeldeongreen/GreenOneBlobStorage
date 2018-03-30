@@ -121,6 +121,112 @@ namespace GreenOneBlobStorageApp.DocumentServiceClient {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DocumentServiceGetRequest", Namespace="http://schemas.datacontract.org/2004/07/GreenOneBlobStorageService.Domain")]
+    [System.SerializableAttribute()]
+    public partial class DocumentServiceGetRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GreenOneBlobStorage.Common.Document DocumentField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GreenOneBlobStorage.Common.Document Document {
+            get {
+                return this.DocumentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentField, value) != true)) {
+                    this.DocumentField = value;
+                    this.RaisePropertyChanged("Document");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DocumentServiceGetResponse", Namespace="http://schemas.datacontract.org/2004/07/GreenOneBlobStorageService.Domain")]
+    [System.SerializableAttribute()]
+    public partial class DocumentServiceGetResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GreenOneBlobStorage.Common.Document DocumentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GreenOneBlobStorage.Common.Document Document {
+            get {
+                return this.DocumentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentField, value) != true)) {
+                    this.DocumentField = value;
+                    this.RaisePropertyChanged("Document");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Error {
+            get {
+                return this.ErrorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorField, value) != true)) {
+                    this.ErrorField = value;
+                    this.RaisePropertyChanged("Error");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DocumentServiceDeleteRequest", Namespace="http://schemas.datacontract.org/2004/07/GreenOneBlobStorageService.Domain")]
     [System.SerializableAttribute()]
     public partial class DocumentServiceDeleteRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -236,10 +342,10 @@ namespace GreenOneBlobStorageApp.DocumentServiceClient {
         System.Threading.Tasks.Task<GreenOneBlobStorageApp.DocumentServiceClient.DocumentServicePostResponse> PostAsync(GreenOneBlobStorageApp.DocumentServiceClient.DocumentServicePostRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/Get", ReplyAction="http://tempuri.org/IDocumentService/GetResponse")]
-        GreenOneBlobStorage.Common.Document Get(GreenOneBlobStorage.Common.Document document);
+        GreenOneBlobStorageApp.DocumentServiceClient.DocumentServiceGetResponse Get(GreenOneBlobStorageApp.DocumentServiceClient.DocumentServiceGetRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/Get", ReplyAction="http://tempuri.org/IDocumentService/GetResponse")]
-        System.Threading.Tasks.Task<GreenOneBlobStorage.Common.Document> GetAsync(GreenOneBlobStorage.Common.Document document);
+        System.Threading.Tasks.Task<GreenOneBlobStorageApp.DocumentServiceClient.DocumentServiceGetResponse> GetAsync(GreenOneBlobStorageApp.DocumentServiceClient.DocumentServiceGetRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/Delete", ReplyAction="http://tempuri.org/IDocumentService/DeleteResponse")]
         GreenOneBlobStorageApp.DocumentServiceClient.DocumentServiceDeleteResponse Delete(GreenOneBlobStorageApp.DocumentServiceClient.DocumentServiceDeleteRequest request);
@@ -283,12 +389,12 @@ namespace GreenOneBlobStorageApp.DocumentServiceClient {
             return base.Channel.PostAsync(request);
         }
         
-        public GreenOneBlobStorage.Common.Document Get(GreenOneBlobStorage.Common.Document document) {
-            return base.Channel.Get(document);
+        public GreenOneBlobStorageApp.DocumentServiceClient.DocumentServiceGetResponse Get(GreenOneBlobStorageApp.DocumentServiceClient.DocumentServiceGetRequest request) {
+            return base.Channel.Get(request);
         }
         
-        public System.Threading.Tasks.Task<GreenOneBlobStorage.Common.Document> GetAsync(GreenOneBlobStorage.Common.Document document) {
-            return base.Channel.GetAsync(document);
+        public System.Threading.Tasks.Task<GreenOneBlobStorageApp.DocumentServiceClient.DocumentServiceGetResponse> GetAsync(GreenOneBlobStorageApp.DocumentServiceClient.DocumentServiceGetRequest request) {
+            return base.Channel.GetAsync(request);
         }
         
         public GreenOneBlobStorageApp.DocumentServiceClient.DocumentServiceDeleteResponse Delete(GreenOneBlobStorageApp.DocumentServiceClient.DocumentServiceDeleteRequest request) {

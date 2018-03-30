@@ -30,9 +30,18 @@ namespace GreenOneBlobStorageService
             return response;
         }
 
-        public async Task<Document> GetAsync(Document document)
+        public async Task<DocumentServiceGetResponse> GetAsync(DocumentServiceGetRequest request)
         {
-            return await Task.Factory.StartNew(() => new Document());
+            DocumentServiceGetResponse response = new DocumentServiceGetResponse();
+            try
+            {
+                request.Document = await _blogStorageService.GetDocumentAsync(request.Document);
+            }
+            catch (System.Exception ex)
+            {
+                response = new DocumentServiceGetResponse() { Error = ex.Message };
+            }
+            return response;
         }
 
         public async Task<DocumentServicePostResponse> PostAsync(DocumentServicePostRequest request)

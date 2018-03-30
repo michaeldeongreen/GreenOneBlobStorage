@@ -15,15 +15,28 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DocumentServicePostResponse" nillable="true" type="tns:DocumentServicePostResponse" />
+  <xs:complexType name="DocumentServiceGetRequest">
+    <xs:sequence>
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/GreenOneBlobStorage.Common" minOccurs="0" name="Document" nillable="true" type="q3:Document" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentServiceGetRequest" nillable="true" type="tns:DocumentServiceGetRequest" />
+  <xs:complexType name="DocumentServiceGetResponse">
+    <xs:sequence>
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/GreenOneBlobStorage.Common" minOccurs="0" name="Document" nillable="true" type="q4:Document" />
+      <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentServiceGetResponse" nillable="true" type="tns:DocumentServiceGetResponse" />
   <xs:complexType name="DocumentServiceDeleteRequest">
     <xs:sequence>
-      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/GreenOneBlobStorage.Common" minOccurs="0" name="Documents" nillable="true" type="q3:ArrayOfDocument" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/GreenOneBlobStorage.Common" minOccurs="0" name="Documents" nillable="true" type="q5:ArrayOfDocument" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DocumentServiceDeleteRequest" nillable="true" type="tns:DocumentServiceDeleteRequest" />
   <xs:complexType name="DocumentServiceDeleteResponse">
     <xs:sequence>
-      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Documents" nillable="true" type="q4:ArrayOfguid" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Documents" nillable="true" type="q6:ArrayOfguid" />
       <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

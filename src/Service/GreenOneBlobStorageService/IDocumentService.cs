@@ -18,7 +18,7 @@ namespace GreenOneBlobStorageService
         [OperationContract]
         Task<DocumentServicePostResponse> PostAsync(DocumentServicePostRequest request);
         [OperationContract]
-        Task<Document> GetAsync(Document document);
+        Task<DocumentServiceGetResponse> GetAsync(DocumentServiceGetRequest request);
         [OperationContract]
         Task<DocumentServiceDeleteResponse> DeleteAsync(DocumentServiceDeleteRequest request);
     }
